@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.deloitte.idefine.dao.IDefineDAO;
-import com.deloitte.idefine.dataobject.SearchDefinitionResultDO;
 import com.deloitte.idefine.entity.IDefineMasterEntity;
 
 @Transactional
@@ -18,8 +17,20 @@ public class IDefineDAOImpl implements IDefineDAO {
 	private EntityManager entityManager;
 
 	@Override
-	public IDefineMasterEntity searchDefinition(SearchDefinitionResultDO searchDefinitionResultDO) {
-		return entityManager.find(IDefineMasterEntity.class, searchDefinitionResultDO.getKeyword());
+	public IDefineMasterEntity searchDefinition(IDefineMasterEntity iDefineMasterEntity) {
+		return entityManager.find(IDefineMasterEntity.class, iDefineMasterEntity.getKeyword());
 	}
 
+	@Override
+	public boolean addDefinition(IDefineMasterEntity iDefineMasterEntity) {
+		boolean result = false;
+		try {
+			entityManager.persist(iDefineMasterEntity);
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }
