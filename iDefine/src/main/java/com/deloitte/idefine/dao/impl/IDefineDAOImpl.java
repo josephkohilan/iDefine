@@ -1,13 +1,17 @@
 package com.deloitte.idefine.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.deloitte.idefine.dao.IDefineDAO;
 import com.deloitte.idefine.entity.IDefineMasterEntity;
+import com.deloitte.idefine.utility.QueryConstants;
 
 @Transactional
 @Repository
@@ -15,6 +19,14 @@ public class IDefineDAOImpl implements IDefineDAO {
 	
 	@PersistenceContext	
 	private EntityManager entityManager;
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getKeyWords() {
+		Query query = entityManager.createNativeQuery(QueryConstants.GET_KEYWORD_QUERY);
+		List<String> keywordList = query.getResultList();
+		return keywordList;
+	}
 
 	@Override
 	public IDefineMasterEntity searchDefinition(IDefineMasterEntity iDefineMasterEntity) {
