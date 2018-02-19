@@ -32,5 +32,16 @@ public class IDefineBOImpl implements IDefineBO {
 		}
 		return result;
 	}
+	
+	@Override
+	public boolean modifyDefinition(IDefineMasterEntity iDefineMasterEntity) {
+		boolean result = false;
+		try {
+			result = iDefineDAO.modifyDefinition(iDefineMasterEntity);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }

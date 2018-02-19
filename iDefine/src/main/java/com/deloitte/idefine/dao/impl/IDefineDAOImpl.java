@@ -33,4 +33,19 @@ public class IDefineDAOImpl implements IDefineDAO {
 		return result;
 	}
 	
+	@Override
+	public boolean modifyDefinition(IDefineMasterEntity iDefineMasterEntity) {
+		boolean result = false;
+		try {
+			IDefineMasterEntity defineMasterEntity = searchDefinition(iDefineMasterEntity);
+			defineMasterEntity.setDefinition(iDefineMasterEntity.getDefinition());
+			defineMasterEntity.setRelatedKeys(iDefineMasterEntity.getRelatedKeys());
+			entityManager.flush();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

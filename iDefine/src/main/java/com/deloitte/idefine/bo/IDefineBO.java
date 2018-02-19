@@ -11,4 +11,6 @@ public interface IDefineBO {
 	
 	public boolean addDefinition(IDefineMasterEntity iDefineMasterEntity);
 
+	public boolean modifyDefinition(IDefineMasterEntity iDefineMasterEntity);
+	
 }
