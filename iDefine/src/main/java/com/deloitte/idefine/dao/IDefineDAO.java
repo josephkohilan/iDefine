@@ -17,4 +17,6 @@ public interface IDefineDAO {
 	
 	public List<String> getKeyWords();
 
+	public List<IDefineMasterEntity> getDefinition(String inputKeyword);
+
 }

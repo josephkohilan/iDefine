@@ -1,8 +1,11 @@
 package com.deloitte.idefine.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -40,6 +43,18 @@ public class IDefineController {
 	public @ResponseBody Set<String> getKeyWords(){
 		TreeSet<String> keyWordsSet = iDefineBO.getKeyWords();
 		return keyWordsSet;
+	}
+	
+	@PostMapping("getDefinition")
+	public @ResponseBody List<IDefineMasterEntity> getDefinition(HttpEntity<String> httpEntity) throws IDefineException{
+		List<IDefineMasterEntity> definitionsList = new ArrayList<IDefineMasterEntity>();
+		try {
+			String inputKeyword = new JSONObject(httpEntity.getBody()).getString(UtilConstants.KEYWORD_KEY);
+			definitionsList = iDefineBO.getDefinition(inputKeyword);
+		} catch (JSONException e) {
+			throw new IDefineException(ExceptionConstants.INVALID_INPUT_EXCEPTION);
+		}
+		return definitionsList;
 	}
 
 	@RequestMapping(value="searchdefinition",method = RequestMethod.POST)

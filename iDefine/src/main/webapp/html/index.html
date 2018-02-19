@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" media="all" href="../css/style.css">
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
-		<script type="text/javascript" src="../js/currency-autocomplete.js"></script>
+		<script type="text/javascript" src="../js/autocomplete.js"></script>
 	</head>
 	
 	<body>
@@ -15,12 +15,12 @@
 			<div id="content">
 				<h1>iEvolve</h1>
 				<div id="searchfield">
-					<form>
-						<input type="text" name="currency" class="biginput" id="autocomplete">
+					<form method="post" action="javascript:void(0);">
+						<input type="text" name="keyword" class="biginput" id="autocomplete">
 					</form>
 				</div>
 				<div id="outputbox">
-					<p id="outputcontent">Choose a currency and the results will display here.</p>
+					<p id="outputcontent"></p>
 				</div>
 			</div>
 		</div>

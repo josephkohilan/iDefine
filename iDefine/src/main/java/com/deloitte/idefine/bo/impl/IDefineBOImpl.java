@@ -1,5 +1,6 @@
 package com.deloitte.idefine.bo.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -65,6 +66,17 @@ public class IDefineBOImpl implements IDefineBO {
 			e.printStackTrace();
 		}
 		return keyWordsSet;
+	}
+
+	@Override
+	public List<IDefineMasterEntity> getDefinition(String inputKeyword) {
+		List<IDefineMasterEntity> definitionsList = new ArrayList<IDefineMasterEntity>();
+		try {
+			definitionsList = iDefineDAO.getDefinition(inputKeyword);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return definitionsList;
 	}
 
 }

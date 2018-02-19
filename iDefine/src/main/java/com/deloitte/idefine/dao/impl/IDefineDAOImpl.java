@@ -16,16 +16,25 @@ import com.deloitte.idefine.utility.QueryConstants;
 @Transactional
 @Repository
 public class IDefineDAOImpl implements IDefineDAO {
-	
-	@PersistenceContext	
+
+	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> getKeyWords() {
 		Query query = entityManager.createNativeQuery(QueryConstants.GET_KEYWORD_QUERY);
 		List<String> keywordList = query.getResultList();
 		return keywordList;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<IDefineMasterEntity> getDefinition(String inputKeyword) {
+		String sql = "SELECT * FROM idefine_master_table WHERE keyword like '%" + inputKeyword + "%'";
+		Query query = entityManager.createNativeQuery(sql, IDefineMasterEntity.class);
+		List<IDefineMasterEntity> definitionsList = query.getResultList();
+		return definitionsList;
 	}
 
 	@Override
@@ -39,12 +48,12 @@ public class IDefineDAOImpl implements IDefineDAO {
 		try {
 			entityManager.persist(iDefineMasterEntity);
 			result = true;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
 	@Override
 	public boolean modifyDefinition(IDefineMasterEntity iDefineMasterEntity) {
 		boolean result = false;
@@ -54,10 +63,10 @@ public class IDefineDAOImpl implements IDefineDAO {
 			defineMasterEntity.setRelatedKeys(iDefineMasterEntity.getRelatedKeys());
 			entityManager.flush();
 			result = true;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
 }
