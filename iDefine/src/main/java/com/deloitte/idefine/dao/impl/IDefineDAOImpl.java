@@ -60,7 +60,7 @@ public class IDefineDAOImpl implements IDefineDAO {
 		try {
 			IDefineMasterEntity defineMasterEntity = searchDefinition(iDefineMasterEntity);
 			defineMasterEntity.setDefinition(iDefineMasterEntity.getDefinition());
-			defineMasterEntity.setRelatedKeys(iDefineMasterEntity.getRelatedKeys());
+			defineMasterEntity.setApprovalStatus(iDefineMasterEntity.getApprovalStatus());
 			entityManager.flush();
 			result = true;
 		} catch (Exception e) {

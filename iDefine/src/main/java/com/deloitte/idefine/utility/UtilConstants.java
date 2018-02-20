@@ -8,6 +8,6 @@ public class UtilConstants {
 	
 	public static final String DEFINITION_KEY = "definition";
 	
-	public static final String RELATED_KEYS_KEY = "related_keys";
+	public static final String APPROVAL_STATUS_KEY = "approval_status";
 
 }

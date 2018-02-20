@@ -13,11 +13,17 @@
 	<body>
 		<div id="w">
 			<div id="content">
-				<center><img src="../img/logo.jpg" height="150"></center>
+				<br><center><img src="../img/logo.jpg" height="150"></center><br>
 				<div id="searchfield">
 					<form method="post" action="javascript:void(0);">
 						<input type="text" name="keyword" class="biginput" id="autocomplete">
 					</form>
+				</div>
+				<center><p id="message"></p></center>
+				<div style="text-align: center; width: 100%; display:none" id="addDefinitionDiv">
+					<p>Word not found. Enter the word, definition and click Add button.</p>
+					<textarea id="definitionText" cols="80" rows="8" maxlength="500"></textarea><br>
+					<input type = "button" value = "Add" class="button" id="addDefinition">
 				</div>
 				<div id="outputbox" style="padding: 30px">
 					<p id="outputcontent"></p>

@@ -19,8 +19,8 @@ public class IDefineMasterEntity {
 	@Column(name = "definition")
 	private String definition;
 
-	@Column(name = "related_keys")
-	private String relatedKeys;
+	@Column(name = "approval_status")
+	private boolean approvalStatus;
 
 	public String getKeyword() {
 		return keyword;
@@ -37,13 +37,13 @@ public class IDefineMasterEntity {
 	public void setDefinition(String definition) {
 		this.definition = definition;
 	}
-
-	public String getRelatedKeys() {
-		return relatedKeys;
+	
+	public boolean getApprovalStatus() {
+		return approvalStatus;
 	}
 
-	public void setRelatedKeys(String relatedKeys) {
-		this.relatedKeys = relatedKeys;
+	public void setApprovalStatus(boolean approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
 
 }

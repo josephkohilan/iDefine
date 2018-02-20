@@ -78,7 +78,7 @@ public class IDefineController {
 				JSONObject inputDefinitionDataJson = new JSONObject(inputDefinitionData);
 				iDefineMasterEntity.setKeyword((String)inputDefinitionDataJson.get(UtilConstants.KEYWORD_KEY));
 				iDefineMasterEntity.setDefinition((String)inputDefinitionDataJson.get(UtilConstants.DEFINITION_KEY));
-				iDefineMasterEntity.setRelatedKeys((String)inputDefinitionDataJson.get(UtilConstants.RELATED_KEYS_KEY));
+				iDefineMasterEntity.setApprovalStatus(false);
 				result = iDefineBO.addDefinition(iDefineMasterEntity);
 			}catch(Exception e) {
 				throw new IDefineException(ExceptionConstants.INVALID_INPUT_EXCEPTION);
@@ -96,7 +96,7 @@ public class IDefineController {
 				JSONObject inputDefinitionDataJson = new JSONObject(inputDefinitionData);
 				iDefineMasterEntity.setKeyword((String)inputDefinitionDataJson.get(UtilConstants.KEYWORD_KEY));
 				iDefineMasterEntity.setDefinition((String)inputDefinitionDataJson.get(UtilConstants.DEFINITION_KEY));
-				iDefineMasterEntity.setRelatedKeys((String)inputDefinitionDataJson.get(UtilConstants.RELATED_KEYS_KEY));
+				iDefineMasterEntity.setApprovalStatus((boolean)inputDefinitionDataJson.get(UtilConstants.APPROVAL_STATUS_KEY));
 				result = iDefineBO.modifyDefinition(iDefineMasterEntity);
 			}catch(Exception e) {
 				throw new IDefineException(ExceptionConstants.INVALID_INPUT_EXCEPTION);
