@@ -37,7 +37,6 @@ $(function() {
 	function getDefinition(keyword) {
 		$('#addDefinitionDiv').css('display', 'none');
 		var thehtml = '<center><strong>' + keyword + '</strong></center>';
-		var definitionCount = 1;
 		$('#addDefinitionDiv').css('display', 'none');
 		$.ajax({
 			url : '/getDefinition',
@@ -50,8 +49,7 @@ $(function() {
 			async : false,
 			success : function(data) {
 				$.each(data, function(key, val) {
-					thehtml = thehtml + '<br>' + definitionCount + '. ' + val.definition;
-					definitionCount++;
+					thehtml = thehtml + '<br>' + val.definition;
 				});
 			}
 		});
@@ -85,7 +83,6 @@ $(function() {
 				success : function(data) {
 					if(data=="true"){
 						getKeyWords();
-						alert(keywords);
 						$('#definitionText').val("");
 						$('#addDefinitionDiv').css('display', 'none');
 						$('#message').html("<font color=green>Successfully Added</font>");
