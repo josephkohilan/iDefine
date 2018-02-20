@@ -21,9 +21,9 @@ $(function() {
 	$(document).keypress(function(e) {
 		if (e.which == 13) {
 			var keyword = $('#autocomplete').val();
+			$('#outputcontent').html("");
 			if(keyword != ""){
 				if(!(keywords.indexOf(keyword) > -1)){
-					$('#outputcontent').html("");
 					alert("new word");
 				}else{
 					getDefinition(keyword);
@@ -32,7 +32,7 @@ $(function() {
 		}
 	});
 	function getDefinition(keyword) {
-		var thehtml = '<strong>'+keyword+'</strong><br><strong>Definition:</strong>';
+		var thehtml = '<strong>'+keyword+'</strong><br><br><strong>Definition:</strong>';
 		var definitionCount = 1;
 		$.ajax({
 			url : '/getDefinition',
@@ -43,7 +43,7 @@ $(function() {
 			async : false,
 			success : function(data) {
 				$.each(data, function(key, val) {
-					thehtml = thehtml + '<br>'+definitionCount+'. '+val.definition;
+					thehtml = thehtml + '<br><br>'+definitionCount+'. '+val.definition;
 					definitionCount++;
 				});
 			}

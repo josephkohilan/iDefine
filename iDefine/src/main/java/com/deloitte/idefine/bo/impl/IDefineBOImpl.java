@@ -58,7 +58,7 @@ public class IDefineBOImpl implements IDefineBO {
 				if(!UtilMethods.isNullOrEmpty(keywords)) {
 					String[] keywordArray = keywords.split(",");
 					for (String keyword : keywordArray) {
-						keyWordsSet.add(keyword);
+						keyWordsSet.add(keyword.trim());
 					}
 				}
 			}
