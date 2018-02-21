@@ -329,3 +329,17 @@ input[type=text]::-ms-clear {
     color: #4CAF50;
     border: 2px solid #009343;
 }
+table{
+	width: 60%;
+	border-collapse: separate; 
+	border-spacing: 20px;
+	font-size: 14px;
+	font-family: "Comic Sans MS";
+}
+td{
+    border: 3px solid white;
+    width: 50%;
+    padding: 20px;
+    height: 300px;
+    box-shadow: 0px 2px 18px 0px rgba(0,0,1,1);
+}

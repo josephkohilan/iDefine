@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>iEvolve</title>
-		<link rel="shortcut icon" href="../img/logo.jpg">
-		<link rel="icon" href="../img/logo.jpg">
-		<link rel="stylesheet" type="text/css" media="all" href="../css/style.css">
-		<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
-		<script type="text/javascript" src="../js/autocomplete.js"></script>
-	</head>
-	
-	<body>
-		<div id="w">
-			<div id="content">
-				<br><center><img src="../img/logo.jpg" height="150"></center><br>
-				<div id="searchfield">
-					<form method="post" action="javascript:void(0);">
-						<input type="text" name="keyword" class="biginput" id="autocomplete">
-					</form>
-				</div>
-				<center><p id="message"></p></center>
-				<div style="text-align: center; width: 100%; display:none" id="addDefinitionDiv">
-					<p>Word not found. Enter the word, definition and click Add button.</p>
-					<textarea id="definitionText" cols="80" rows="8" maxlength="500"></textarea><br>
-					<input type = "button" value = "Add" class="button" id="addDefinition">
-				</div>
-				<div id="outputbox" style="padding: 30px">
-					<p id="outputcontent"></p>
-				</div>
+<head>
+<title>iEvolve</title>
+<link rel="shortcut icon" href="../img/logo.jpg">
+<link rel="icon" href="../img/logo.jpg">
+<link rel="stylesheet" type="text/css" media="all"
+	href="../css/style.css">
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
+<script type="text/javascript" src="../js/autocomplete.js"></script>
+</head>
+
+<body>
+	<div id="w">
+		<div id="content">
+			<br><center><img src="../img/logo.jpg" height="150"></center><br>
+			<div id="searchfield">
+				<form method="post" action="javascript:void(0);">
+					<input type="text" name="keyword" class="biginput"
+						id="autocomplete">
+				</form>
+			</div>
+			<center><p id="message"></p></center>
+			<div style="text-align: center; width: 100%; display: none"
+				id="addDefinitionDiv">
+				<p>Word not found. Enter the word, definition and click Add
+					button.</p>
+				<textarea id="definitionText" cols="80" rows="8" maxlength="500"></textarea>
+				<br> <input type="button" value="Add" class="button"
+					id="addDefinition">
+			</div>
+			<div id="outputbox" style="padding: 30px; text-align: center;">
+				<p id="outputcontent"></p>
+				<center><table id="outputCardsTable"></table></center>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 </html>

@@ -24,7 +24,7 @@ $(function() {
 	$('#autocomplete').keypress(function(e) {
 		if (e.which == 13) {
 			var keyword = $('#autocomplete').val();
-			$('#outputcontent').html("");
+			$('#outputCardsTable').html("");
 			if (keyword != "") {
 				if (!(keywords.indexOf(keyword) > -1)) {
 					$('#addDefinitionDiv').css('display', 'block');
@@ -36,7 +36,8 @@ $(function() {
 	});
 	function getDefinition(keyword) {
 		$('#addDefinitionDiv').css('display', 'none');
-		var thehtml = '<center><strong>' + keyword + '</strong></center>';
+		var flashCards = "";
+		var elementCount = 0;
 		$('#addDefinitionDiv').css('display', 'none');
 		$.ajax({
 			url : '/getDefinition',
@@ -49,11 +50,32 @@ $(function() {
 			async : false,
 			success : function(data) {
 				$.each(data, function(key, val) {
-					thehtml = thehtml + '<br>' + val.definition;
+					if(elementCount%2==0){
+						flashCards = flashCards + '<tr>';
+					}
+					elementCount++;
+					if(elementCount%4==0){
+						flashCards = flashCards + '<td style="background-color: #ABEBC6;">';
+					}else if(elementCount%4==1){
+						flashCards = flashCards + '<td style="background-color: #F7DC6F;">';
+					}else if(elementCount%4==2){
+						flashCards = flashCards + '<td style="background-color: #D6EAF8;">';
+					}else if(elementCount%4==3){
+						flashCards = flashCards + '<td style="background-color: #E8DAEF;">';
+					}
+					flashCards = flashCards + '<center><strong>' + keyword + '</strong></center><br>';
+					flashCards = flashCards + val.definition + '</td>';
+					if(elementCount%2==0){
+						flashCards = flashCards + '</tr>';
+					}
 				});
+				if(elementCount%2!=0){
+					flashCards = flashCards + '<td style="box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);"></td></tr>';
+				}
 			}
 		});
-		$('#outputcontent').html(thehtml);
+		$('#outputCardsTable').html(flashCards);
+		
 	}
 	
 	$('#autocomplete').focusout(function(e) {
