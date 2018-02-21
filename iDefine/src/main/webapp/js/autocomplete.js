@@ -63,7 +63,12 @@ $(function() {
 					}else if(elementCount%4==3){
 						flashCards = flashCards + '<td style="background-color: #E8DAEF;">';
 					}
-					flashCards = flashCards + '<center><strong>' + keyword + '</strong></center><br>';
+					if(val.approvalStatus == true){
+						flashCards = flashCards + '<center><strong>' + keyword + '</strong></center><br>';
+					}else{
+						flashCards = flashCards + '<center><strong>' + keyword + 
+						'</strong><img src = "../img/warning.png" width = 15px title="Yet to be reviewed"></center><br>';
+					}
 					flashCards = flashCards + val.definition + '</td>';
 					if(elementCount%2==0){
 						flashCards = flashCards + '</tr>';
