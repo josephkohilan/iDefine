@@ -1,4 +1,6 @@
 $(function() {
+	var upvote = false;
+	var downvote = false;
 	var keywords = [];
 	getKeyWords();
 	function getKeyWords(){
@@ -55,41 +57,50 @@ $(function() {
 					}
 					elementCount++;
 					if(elementCount%4==0){
-						flashCards = flashCards + '<td style="background-color: #ABEBC6;">';
+						flashCards = flashCards + '<td class="flashCard" style="background-color: #ABEBC6;">';
 					}else if(elementCount%4==1){
-						flashCards = flashCards + '<td style="background-color: #F7DC6F;">';
+						flashCards = flashCards + '<td class="flashCard" style="background-color: #F7DC6F;">';
 					}else if(elementCount%4==2){
-						flashCards = flashCards + '<td style="background-color: #D6EAF8;">';
+						flashCards = flashCards + '<td class="flashCard" style="background-color: #D6EAF8;">';
 					}else if(elementCount%4==3){
-						flashCards = flashCards + '<td style="background-color: #E8DAEF;">';
+						flashCards = flashCards + '<td class="flashCard" style="background-color: #E8DAEF;">';
 					}
+					flashCards = flashCards + '<table class="votingTable"><tr><td class="definitionData">';
 					if(val.approvalStatus == true){
 						flashCards = flashCards + '<center><strong>' + keyword + '</strong></center><br>';
 					}else{
 						flashCards = flashCards + '<center><strong>' + keyword + 
 						'</strong><img src = "../img/warning.png" width = 15px title="Yet to be reviewed"></center><br>';
 					}
-					flashCards = flashCards + val.definition + '</td>';
+					flashCards = flashCards + val.definition + '</td></tr>' + 
+					'<tr>' + 
+						'<td class="buttonsData">' + 
+							'<table class="votingTable">'+
+								'<tr>' + 
+									'<td>'+
+										'<img src="../img/happy.png" width="20px" class="voteButton" id="'+val.definitionId+'">'+
+										'(' + val.upVotes + ')' +
+									'</td>' +
+									'<td>'+
+										'<img src="../img/sad.png" width="20px" class="voteButton" id="'+val.definitionId+'">'+
+										'(' + val.downVotes + ')' +
+									'</td>' +
+								'</tr>' +
+							'</table>' + 
+						'</td>' +
+					'</tr></table></td>';
 					if(elementCount%2==0){
 						flashCards = flashCards + '</tr>';
 					}
 				});
 				if(elementCount%2!=0){
-					flashCards = flashCards + '<td style="box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);"></td></tr>';
+					flashCards = flashCards + '<td class="flashCard" style="box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);"></td></tr>';
 				}
 			}
 		});
 		$('#outputCardsTable').html(flashCards);
-		
+		addClickFuntion();
 	}
-	
-	$('#autocomplete').focusout(function(e) {
-		if (keywords.indexOf($('#autocomplete').val()) > -1) {
-			$('#addDefinitionDiv').css('display', 'none');
-			getDefinition($('#autocomplete').val());
-		}
-	});
-
 	$('#addDefinition').click(function() {
 		if($('#definitionText').val().trim()==""){
 			$('#definitionText').focus();
@@ -122,5 +133,18 @@ $(function() {
 			});
 		}
 	});
-
+	/*function addClickFuntion(){
+		var voteButtons = document.getElementsByClassName("voteButton");
+		for (var i = 0; i < voteButtons.length; i++) {
+			voteID = voteButtons[i].id;
+			alert(voteID);
+			voteButtons[i].addEventListener('click', countVote(this), false);
+		}
+	}
+	function countVote(element){
+		alert(element.className);
+	}*/
+	$('.voteButton').click(function() {
+		alert("click");
+	});
 });

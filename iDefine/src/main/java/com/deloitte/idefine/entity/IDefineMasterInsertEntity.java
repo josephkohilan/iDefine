@@ -10,15 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "idefine_master_table")
-public class IDefineMasterEntity {
-	
-	@Id
-	@Column(name = "definition_id")
-	private String definitionId;
+public class IDefineMasterInsertEntity {
 	
 	@Column(name = "keyword")
 	private String keyword;
 	
+	@Id
 	@Column(name = "definition")
 	private String definition;
 
@@ -30,15 +27,6 @@ public class IDefineMasterEntity {
 	
 	@Column(name = "down_votes")
 	private int downVotes;
-	
-
-	public String getDefinitionId() {
-		return definitionId;
-	}
-
-	public void setDefinitionId(String definitionId) {
-		this.definitionId = definitionId;
-	}
 
 	public String getKeyword() {
 		return keyword;

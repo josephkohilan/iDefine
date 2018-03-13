@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.deloitte.idefine.dao.IDefineDAO;
 import com.deloitte.idefine.entity.IDefineMasterEntity;
+import com.deloitte.idefine.entity.IDefineMasterInsertEntity;
 import com.deloitte.idefine.utility.QueryConstants;
 
 @Transactional
@@ -38,15 +39,10 @@ public class IDefineDAOImpl implements IDefineDAO {
 	}
 
 	@Override
-	public IDefineMasterEntity searchDefinition(IDefineMasterEntity iDefineMasterEntity) {
-		return entityManager.find(IDefineMasterEntity.class, iDefineMasterEntity.getKeyword());
-	}
-
-	@Override
-	public boolean addDefinition(IDefineMasterEntity iDefineMasterEntity) {
+	public boolean addDefinition(IDefineMasterInsertEntity iDefineMasterInsertEntity) {
 		boolean result = false;
 		try {
-			entityManager.persist(iDefineMasterEntity);
+			entityManager.persist(iDefineMasterInsertEntity);
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,13 +51,13 @@ public class IDefineDAOImpl implements IDefineDAO {
 	}
 
 	@Override
-	public boolean modifyDefinition(IDefineMasterEntity iDefineMasterEntity) {
+	public boolean updateVote(String definitionId, int upVote, int downVote) {
 		boolean result = false;
 		try {
-			IDefineMasterEntity defineMasterEntity = searchDefinition(iDefineMasterEntity);
-			defineMasterEntity.setDefinition(iDefineMasterEntity.getDefinition());
-			defineMasterEntity.setApprovalStatus(iDefineMasterEntity.getApprovalStatus());
-			entityManager.flush();
+			String sql = "UPDATE idefine_master_table SET up_votes = up_votes + (" + upVote
+					+ "), down_votes = down_votes + (" + downVote + ") WHERE definition_id = '" + definitionId + "'";
+			Query query = entityManager.createNativeQuery(sql);
+			query.executeUpdate();
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.deloitte.idefine.bo.IDefineBO;
 import com.deloitte.idefine.dao.IDefineDAO;
 import com.deloitte.idefine.entity.IDefineMasterEntity;
+import com.deloitte.idefine.entity.IDefineMasterInsertEntity;
 import com.deloitte.idefine.utility.UtilMethods;
 
 @Service
@@ -17,32 +18,12 @@ public class IDefineBOImpl implements IDefineBO {
 
 	@Autowired
 	private IDefineDAO iDefineDAO;
-
-	public IDefineMasterEntity searchDefinition(IDefineMasterEntity iDefineMasterEntity) {
-		try {
-			iDefineMasterEntity = iDefineDAO.searchDefinition(iDefineMasterEntity);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return iDefineMasterEntity;
-	}
 	
 	@Override
-	public boolean addDefinition(IDefineMasterEntity iDefineMasterEntity) {
+	public boolean addDefinition(IDefineMasterInsertEntity iDefineMasterInsertEntity) {
 		boolean result = false;
 		try {
-			result = iDefineDAO.addDefinition(iDefineMasterEntity);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	@Override
-	public boolean modifyDefinition(IDefineMasterEntity iDefineMasterEntity) {
-		boolean result = false;
-		try {
-			result = iDefineDAO.modifyDefinition(iDefineMasterEntity);
+			result = iDefineDAO.addDefinition(iDefineMasterInsertEntity);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -77,6 +58,17 @@ public class IDefineBOImpl implements IDefineBO {
 			e.printStackTrace();
 		}
 		return definitionsList;
+	}
+
+	@Override
+	public boolean updateVote(String definitionId, int upVote, int downVote) {
+		boolean result = false;
+		try {
+			result = iDefineDAO.updateVote(definitionId, upVote, downVote);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
