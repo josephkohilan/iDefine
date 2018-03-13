@@ -67,9 +67,9 @@ $(function() {
 					}
 					flashCards = flashCards + '<table class="votingTable"><tr><td class="definitionData">';
 					if(val.approvalStatus == true){
-						flashCards = flashCards + '<center><strong>' + keyword + '</strong></center><br>';
+						flashCards = flashCards + '<center><strong>' + keyword.toUpperCase() + '</strong></center><br>';
 					}else{
-						flashCards = flashCards + '<center><strong>' + keyword + 
+						flashCards = flashCards + '<center><strong>' + keyword.toUpperCase() + 
 						'</strong><img src = "../img/warning.png" width = 15px title="Yet to be reviewed"></center><br>';
 					}
 					flashCards = flashCards + val.definition + '</td></tr>' + 
@@ -78,12 +78,12 @@ $(function() {
 							'<table class="votingTable">'+
 								'<tr>' + 
 									'<td>'+
-										'<img src="../img/happy.png" width="20px" class="voteButton" id="'+val.definitionId+'">'+
-										'(' + val.upVotes + ')' +
+										'<img src="../img/happy.png" width="20px" clicked="F" id="plusVote_'+val.definitionId+'" onclick="vote(plusVote_'+val.definitionId+')">'+
+										'<span id="plusVote_'+val.definitionId+'_count"">(' + val.upVotes + ')</span><input type="hidden" value="F" id="plusVote_'+val.definitionId+'_click">' +
 									'</td>' +
 									'<td>'+
-										'<img src="../img/sad.png" width="20px" class="voteButton" id="'+val.definitionId+'">'+
-										'(' + val.downVotes + ')' +
+										'<img src="../img/sad.png" width="20px" clicked="F" id="minusVote_'+val.definitionId+'" onclick="vote(minusVote_'+val.definitionId+')">'+
+										'<span id="minusVote_'+val.definitionId+'_count">(' + val.downVotes + ')</span><input type="hidden" value="F" id="minusVote_'+val.definitionId+'_click">' +
 									'</td>' +
 								'</tr>' +
 							'</table>' + 
@@ -99,7 +99,6 @@ $(function() {
 			}
 		});
 		$('#outputCardsTable').html(flashCards);
-		addClickFuntion();
 	}
 	$('#addDefinition').click(function() {
 		if($('#definitionText').val().trim()==""){
@@ -133,18 +132,7 @@ $(function() {
 			});
 		}
 	});
-	/*function addClickFuntion(){
-		var voteButtons = document.getElementsByClassName("voteButton");
-		for (var i = 0; i < voteButtons.length; i++) {
-			voteID = voteButtons[i].id;
-			alert(voteID);
-			voteButtons[i].addEventListener('click', countVote(this), false);
-		}
-	}
-	function countVote(element){
-		alert(element.className);
-	}*/
-	$('.voteButton').click(function() {
-		alert("click");
+	$('#autocomplete').keyup(function(e) {
+		this.value=this.value.toLowerCase();
 	});
 });

@@ -1,5 +1,6 @@
 package com.deloitte.idefine.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -31,10 +32,11 @@ public class IDefineDAOImpl implements IDefineDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<IDefineMasterEntity> getDefinition(String inputKeyword) {
-		String sql = "SELECT * FROM idefine_master_table WHERE keyword like '%" + inputKeyword + "%'";
+	public ArrayList<IDefineMasterEntity> getDefinition(String inputKeyword) {
+		String sql = "SELECT * FROM idefine_master_table WHERE keyword like '%" + inputKeyword
+				+ "%' ORDER BY up_votes DESC";
 		Query query = entityManager.createNativeQuery(sql, IDefineMasterEntity.class);
-		List<IDefineMasterEntity> definitionsList = query.getResultList();
+		ArrayList<IDefineMasterEntity> definitionsList = (ArrayList<IDefineMasterEntity>) query.getResultList();
 		return definitionsList;
 	}
 
@@ -54,8 +56,8 @@ public class IDefineDAOImpl implements IDefineDAO {
 	public boolean updateVote(String definitionId, int upVote, int downVote) {
 		boolean result = false;
 		try {
-			String sql = "UPDATE idefine_master_table SET up_votes = up_votes + (" + upVote
-					+ "), down_votes = down_votes + (" + downVote + ") WHERE definition_id = '" + definitionId + "'";
+			String sql = "UPDATE idefine_master_table SET up_votes = '" + upVote + "', down_votes = '" + downVote
+					+ "' WHERE definition_id = '" + definitionId + "'";
 			Query query = entityManager.createNativeQuery(sql);
 			query.executeUpdate();
 			result = true;

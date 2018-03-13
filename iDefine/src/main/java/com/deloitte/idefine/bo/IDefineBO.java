@@ -1,6 +1,6 @@
 package com.deloitte.idefine.bo;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public interface IDefineBO {
 
 	public TreeSet<String> getKeyWords();
 
-	public List<IDefineMasterEntity> getDefinition(String inputKeyword);
+	public ArrayList<IDefineMasterEntity> getDefinition(String inputKeyword);
 
 	public boolean updateVote(String definitionId, int upVote, int downVote);
 	

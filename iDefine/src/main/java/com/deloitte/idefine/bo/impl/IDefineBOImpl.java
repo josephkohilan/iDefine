@@ -39,7 +39,7 @@ public class IDefineBOImpl implements IDefineBO {
 				if(!UtilMethods.isNullOrEmpty(keywords)) {
 					String[] keywordArray = keywords.split(",");
 					for (String keyword : keywordArray) {
-						keyWordsSet.add(keyword.trim());
+						keyWordsSet.add(keyword.trim().toLowerCase());
 					}
 				}
 			}
@@ -50,8 +50,8 @@ public class IDefineBOImpl implements IDefineBO {
 	}
 
 	@Override
-	public List<IDefineMasterEntity> getDefinition(String inputKeyword) {
-		List<IDefineMasterEntity> definitionsList = new ArrayList<IDefineMasterEntity>();
+	public ArrayList<IDefineMasterEntity> getDefinition(String inputKeyword) {
+		ArrayList<IDefineMasterEntity> definitionsList = new ArrayList<IDefineMasterEntity>();
 		try {
 			definitionsList = iDefineDAO.getDefinition(inputKeyword);
 		}catch(Exception e) {

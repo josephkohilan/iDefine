@@ -1,5 +1,6 @@
 package com.deloitte.idefine.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ public interface IDefineDAO {
 
 	public List<String> getKeyWords();
 
-	public List<IDefineMasterEntity> getDefinition(String inputKeyword);
+	public ArrayList<IDefineMasterEntity> getDefinition(String inputKeyword);
 
 	public boolean addDefinition(IDefineMasterInsertEntity iDefineMasterInsertEntity);
 	

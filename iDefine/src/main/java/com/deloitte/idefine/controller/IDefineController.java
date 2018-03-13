@@ -48,7 +48,7 @@ public class IDefineController {
 	@PostMapping("getDefinition")
 	public @ResponseBody List<IDefineMasterEntity> getDefinition(HttpEntity<String> httpEntity)
 			throws IDefineException {
-		List<IDefineMasterEntity> definitionsList = new ArrayList<IDefineMasterEntity>();
+		ArrayList<IDefineMasterEntity> definitionsList = new ArrayList<IDefineMasterEntity>();
 		try {
 			String inputKeyword = new JSONObject(httpEntity.getBody()).getString(UtilConstants.KEYWORD_KEY);
 			definitionsList = iDefineBO.getDefinition(inputKeyword);
@@ -65,7 +65,7 @@ public class IDefineController {
 		if (!UtilMethods.isNullOrEmpty(inputDefinitionData)) {
 			try {
 				JSONObject inputDefinitionDataJson = new JSONObject(inputDefinitionData);
-				iDefineMasterInsertEntity.setKeyword((String) inputDefinitionDataJson.get(UtilConstants.KEYWORD_KEY));
+				iDefineMasterInsertEntity.setKeyword(((String) inputDefinitionDataJson.get(UtilConstants.KEYWORD_KEY)).toLowerCase());
 				iDefineMasterInsertEntity
 						.setDefinition((String) inputDefinitionDataJson.get(UtilConstants.DEFINITION_KEY));
 				iDefineMasterInsertEntity.setApprovalStatus(false);

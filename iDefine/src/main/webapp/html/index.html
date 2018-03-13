@@ -10,7 +10,66 @@
 <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
 <script type="text/javascript" src="../js/autocomplete.js"></script>
 </head>
-
+<script type="text/javascript">
+	function vote(idName) {
+		var voteButtonId = idName.id;
+		var votedButton = voteButtonId.split("_")[0];
+		var voteId = voteButtonId.split("_")[1];
+		if(votedButton=="plusVote"){
+			if(document.getElementById(voteButtonId+"_click").value=="F"){
+				var voteCountStr = document.getElementById(voteButtonId+"_count").innerHTML;
+				var voteCount = parseInt(voteCountStr.substring(1, voteCountStr.length-1)) + 1;
+				var oppVoteCountStr = document.getElementById("minusVote_"+voteId+"_count").innerHTML;
+				var oppVoteCount = parseInt(oppVoteCountStr.substring(1, oppVoteCountStr.length-1));
+				if(document.getElementById("minusVote_"+voteId+"_click").value=="T"){
+					oppVoteCount--;
+				}
+				idName.src = "../img/happyClick.png";
+				document.getElementById(voteButtonId+"_count").innerHTML = "("+voteCount+")";
+				document.getElementById(voteButtonId+"_click").value="T";
+				document.getElementById("minusVote_"+voteId).src = "../img/sad.png";
+				document.getElementById("minusVote_"+voteId+"_count").innerHTML = "("+oppVoteCount+")";
+				document.getElementById("minusVote_"+voteId+"_click").value="F";
+				updateVote(voteId,voteCount,oppVoteCount);
+			}
+		}
+		else if(votedButton=="minusVote"){
+			if(document.getElementById(voteButtonId+"_click").value=="F"){
+				var voteCountStr = document.getElementById(voteButtonId+"_count").innerHTML;
+				var voteCount = parseInt(voteCountStr.substring(1, voteCountStr.length-1)) + 1;
+				var oppVoteCountStr = document.getElementById("plusVote_"+voteId+"_count").innerHTML;
+				var oppVoteCount = parseInt(oppVoteCountStr.substring(1, oppVoteCountStr.length-1));
+				if(document.getElementById("plusVote_"+voteId+"_click").value=="T"){
+					oppVoteCount--;
+				}
+				idName.src = "../img/sadClick.png";
+				document.getElementById(voteButtonId+"_count").innerHTML = "("+voteCount+")";
+				document.getElementById(voteButtonId+"_click").value="T";
+				document.getElementById("plusVote_"+voteId).src = "../img/happy.png";
+				document.getElementById("plusVote_"+voteId+"_count").innerHTML = "("+oppVoteCount+")";
+				document.getElementById("plusVote_"+voteId+"_click").value="F";
+				updateVote(voteId,oppVoteCount,voteCount);
+			}
+		}
+	}
+	function updateVote(definitionID, upVoteCount, downVoteCount){
+		$.ajax({
+			url : '/updateVote',
+			type : 'post',
+			data : JSON.stringify({
+				"definitionId" : definitionID,
+				"upVote": upVoteCount,
+				"downVote": downVoteCount,		
+			}),
+			dataType : 'json',
+			contentType : "application/json; charset=utf-8",
+			async : false,
+			success : function(data) {
+				
+			}
+		});
+	}
+</script>
 <body>
 	<div id="w">
 		<div id="content">
