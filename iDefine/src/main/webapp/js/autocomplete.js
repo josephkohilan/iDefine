@@ -6,8 +6,8 @@ $(function() {
 	function getKeyWords(){
 		keywords = [];
 		$.ajax({
-			url : '/getKeyWords',
-			type : 'post',
+			url : '/iEvolve/keyWords',
+			type : 'get',
 			dataType : 'json',
 			async : false,
 			success : function(data) {
@@ -42,13 +42,9 @@ $(function() {
 		var elementCount = 0;
 		$('#addDefinitionDiv').css('display', 'none');
 		$.ajax({
-			url : '/getDefinition',
-			type : 'post',
-			data : JSON.stringify({
-				"keyword" : keyword
-			}),
+			url : '/iEvolve/definition/'+keyword,
+			type : 'get',
 			dataType : 'json',
-			contentType : "application/json; charset=utf-8",
 			async : false,
 			success : function(data) {
 				$.each(data, function(key, val) {
@@ -72,7 +68,8 @@ $(function() {
 						flashCards = flashCards + '<center><strong>' + keyword.toUpperCase() + 
 						'</strong><img src = "../img/warning.png" width = 15px title="Yet to be reviewed"></center><br>';
 					}
-					flashCards = flashCards + val.definition + '</td></tr>' + 
+					flashCards = flashCards + val.createdDate + '<br>';
+					flashCards = flashCards + val.definition.replace(/\n/g, "<br>") + '</td></tr>' + 
 					'<tr>' + 
 						'<td class="buttonsData">' + 
 							'<table class="votingTable">'+
@@ -111,7 +108,7 @@ $(function() {
 		}else{
 			$('#message').html("");
 			$.ajax({
-				url : '/addDefinition',
+				url : '/definition',
 				type : 'post',
 				data : JSON.stringify({"keyword" : $('#autocomplete').val(), "definition" : $('#definitionText').val()}),
 				dataType : 'text',

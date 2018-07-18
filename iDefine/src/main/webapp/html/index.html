@@ -54,8 +54,8 @@
 	}
 	function updateVote(definitionID, upVoteCount, downVoteCount){
 		$.ajax({
-			url : '/updateVote',
-			type : 'post',
+			url : '/vote',
+			type : 'put',
 			data : JSON.stringify({
 				"definitionId" : definitionID,
 				"upVote": upVoteCount,
