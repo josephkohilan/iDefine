@@ -4,9 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +18,7 @@ import com.deloitte.idefine.dto.DefinitionDto;
 import com.deloitte.idefine.entity.DefinitionEntity;
 import com.deloitte.idefine.exception.IDefineException;
 import com.deloitte.idefine.service.DefinitionService;
-import com.deloitte.idefine.utility.ExceptionConstants;
 import com.deloitte.idefine.utility.UtilConstants;
-import com.deloitte.idefine.utility.UtilMethods;
 
 @Controller
 public class DefinitionController {
@@ -32,8 +28,14 @@ public class DefinitionController {
 
 	@Autowired
 	private DefinitionService iDefineBO;
+	
+	@GetMapping("/")
+	@ResponseBody
+	public String getHome() {
+		return "iEvolve is high and healthy! click <a href='/iEvolve'>here</a> to launch!";
+	}
 
-	@GetMapping("iEvolve")
+	@GetMapping("/iEvolve")
 	public ModelAndView homePage() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("index");
@@ -53,6 +55,7 @@ public class DefinitionController {
 
 	@PostMapping("definition")
 	public @ResponseBody boolean addDefinition(@RequestBody DefinitionDto definitionDto) throws IDefineException {
+		iDefineMasterEntity.setDefinitionId(null);
 		iDefineMasterEntity.setKeyword(definitionDto.getKeyword().toLowerCase().trim());
 		iDefineMasterEntity.setDefinition(definitionDto.getDefinition().trim());
 		iDefineMasterEntity.setApprovalStatus(false);
