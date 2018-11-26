@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,12 +43,12 @@ public class DefinitionController {
 		return modelAndView;
 	}
 
-	@GetMapping("iEvolve/keyWords")
+	@GetMapping("keyWords")
 	public @ResponseBody Set<String> getKeyWords() {
 		return iDefineBO.getKeyWords();
 	}
 
-	@GetMapping("iEvolve/definition/{inputKeyword}")
+	@GetMapping("definition/{inputKeyword}")
 	public @ResponseBody List<DefinitionEntity> getDefinition(@PathVariable String inputKeyword)
 			throws IDefineException {
 		return iDefineBO.getDefinition(inputKeyword);
@@ -69,6 +70,23 @@ public class DefinitionController {
 	public @ResponseBody boolean updateVote(@RequestBody DefinitionDto definitionDto) throws IDefineException {
 		return iDefineBO.updateVote(definitionDto.getDefinitionId(), definitionDto.getUpVote(),
 				definitionDto.getDownVote());
+	}
+	
+	@DeleteMapping("definition/{definitionId}")
+	public @ResponseBody boolean deleteDefinition(@PathVariable String definitionId) {
+		return iDefineBO.deleteDefinition(definitionId);
+	}
+	
+	@PutMapping("definition")
+	public @ResponseBody boolean updateDefinition(@RequestBody DefinitionDto definitionDto) {
+		iDefineMasterEntity.setDefinitionId(definitionDto.getDefinitionId());
+		iDefineMasterEntity.setKeyword(null);
+		iDefineMasterEntity.setDefinition(definitionDto.getDefinition());
+		iDefineMasterEntity.setApprovalStatus(false);
+		iDefineMasterEntity.setUpVotes(UtilConstants.VOTE_COUNT_ZERO);
+		iDefineMasterEntity.setDownVotes(UtilConstants.VOTE_COUNT_ZERO);
+		iDefineMasterEntity.setCreatedDate(new Date(System.currentTimeMillis()));
+		return iDefineBO.updateDefinition(iDefineMasterEntity);
 	}
 
 }

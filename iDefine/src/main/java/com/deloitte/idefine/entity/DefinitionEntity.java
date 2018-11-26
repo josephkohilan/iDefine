@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,6 +23,9 @@ public class DefinitionEntity {
 	
 	@Column(name = "keyword")
 	private String keyword;
+	
+	@Column(name = "category")
+	private String category;
 	
 	@Column(name = "definition")
 	private String definition;
@@ -96,6 +97,14 @@ public class DefinitionEntity {
 
 	public void setDownVotes(int downVotes) {
 		this.downVotes = downVotes;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 }

@@ -18,4 +18,8 @@ public interface DefinitionRepository {
 	
 	public boolean updateVote(String definitionId, int upVote, int downVote);
 
+	public boolean deleteDefinition(String definitionId);
+
+	public boolean updateDefinition(DefinitionEntity iDefineMasterEntity);
+
 }

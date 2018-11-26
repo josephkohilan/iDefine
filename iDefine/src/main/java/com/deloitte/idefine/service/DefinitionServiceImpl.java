@@ -51,4 +51,14 @@ public class DefinitionServiceImpl implements DefinitionService {
 		return iDefineDAO.updateVote(definitionId, upVote, downVote);
 	}
 
+	@Override
+	public boolean deleteDefinition(String definitionId) {
+		return iDefineDAO.deleteDefinition(definitionId);
+	}
+
+	@Override
+	public boolean updateDefinition(DefinitionEntity iDefineMasterEntity) {
+		return iDefineDAO.updateDefinition(iDefineMasterEntity);
+	}
+
 }

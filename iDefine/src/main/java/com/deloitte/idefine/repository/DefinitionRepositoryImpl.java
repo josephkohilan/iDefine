@@ -51,4 +51,23 @@ public class DefinitionRepositoryImpl implements DefinitionRepository {
 		return true;
 	}
 
+	@Override
+	public boolean deleteDefinition(String definitionId) {
+		String sql = "DELETE from idefine_master_table WHERE definition_id = '" + definitionId + "'";
+		Query query = entityManager.createNativeQuery(sql);
+		query.executeUpdate();
+		return true;
+	}
+
+	@Override
+	public boolean updateDefinition(DefinitionEntity iDefineMasterEntity) {
+		String sql = "update idefine_master_table set definition = '"+iDefineMasterEntity.getDefinition()+"', "
+				+ "approval_status = "+ iDefineMasterEntity.getApprovalStatus() +", up_votes = '"+ iDefineMasterEntity.getUpVotes() +"', "
+				+ "down_votes = '"+ iDefineMasterEntity.getDownVotes() +"', created_date = '"+ iDefineMasterEntity.getCreatedDate() +"' "
+				+ "WHERE definition_id = '" + iDefineMasterEntity.getDefinitionId() + "'";
+		Query query = entityManager.createNativeQuery(sql);
+		query.executeUpdate();
+		return true;
+	}
+
 }

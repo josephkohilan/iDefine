@@ -10,83 +10,35 @@
 <script type="text/javascript" src="../js/jquery.autocomplete.min.js"></script>
 <script type="text/javascript" src="../js/autocomplete.js"></script>
 </head>
-<script type="text/javascript">
-	function vote(idName) {
-		var voteButtonId = idName.id;
-		var votedButton = voteButtonId.split("_")[0];
-		var voteId = voteButtonId.split("_")[1];
-		if(votedButton=="plusVote"){
-			if(document.getElementById(voteButtonId+"_click").value=="F"){
-				var voteCountStr = document.getElementById(voteButtonId+"_count").innerHTML;
-				var voteCount = parseInt(voteCountStr.substring(1, voteCountStr.length-1)) + 1;
-				var oppVoteCountStr = document.getElementById("minusVote_"+voteId+"_count").innerHTML;
-				var oppVoteCount = parseInt(oppVoteCountStr.substring(1, oppVoteCountStr.length-1));
-				if(document.getElementById("minusVote_"+voteId+"_click").value=="T"){
-					oppVoteCount--;
-				}
-				idName.src = "../img/happyClick.png";
-				document.getElementById(voteButtonId+"_count").innerHTML = "("+voteCount+")";
-				document.getElementById(voteButtonId+"_click").value="T";
-				document.getElementById("minusVote_"+voteId).src = "../img/sad.png";
-				document.getElementById("minusVote_"+voteId+"_count").innerHTML = "("+oppVoteCount+")";
-				document.getElementById("minusVote_"+voteId+"_click").value="F";
-				updateVote(voteId,voteCount,oppVoteCount);
-			}
-		}
-		else if(votedButton=="minusVote"){
-			if(document.getElementById(voteButtonId+"_click").value=="F"){
-				var voteCountStr = document.getElementById(voteButtonId+"_count").innerHTML;
-				var voteCount = parseInt(voteCountStr.substring(1, voteCountStr.length-1)) + 1;
-				var oppVoteCountStr = document.getElementById("plusVote_"+voteId+"_count").innerHTML;
-				var oppVoteCount = parseInt(oppVoteCountStr.substring(1, oppVoteCountStr.length-1));
-				if(document.getElementById("plusVote_"+voteId+"_click").value=="T"){
-					oppVoteCount--;
-				}
-				idName.src = "../img/sadClick.png";
-				document.getElementById(voteButtonId+"_count").innerHTML = "("+voteCount+")";
-				document.getElementById(voteButtonId+"_click").value="T";
-				document.getElementById("plusVote_"+voteId).src = "../img/happy.png";
-				document.getElementById("plusVote_"+voteId+"_count").innerHTML = "("+oppVoteCount+")";
-				document.getElementById("plusVote_"+voteId+"_click").value="F";
-				updateVote(voteId,oppVoteCount,voteCount);
-			}
-		}
-	}
-	function updateVote(definitionID, upVoteCount, downVoteCount){
-		$.ajax({
-			url : '/vote',
-			type : 'put',
-			data : JSON.stringify({
-				"definitionId" : definitionID,
-				"upVote": upVoteCount,
-				"downVote": downVoteCount,		
-			}),
-			dataType : 'json',
-			contentType : "application/json; charset=utf-8",
-			async : false,
-			success : function(data) {
-				
-			}
-		});
-	}
-</script>
 <body>
 	<div id="w">
 		<div id="content">
 			<br><center><img src="../img/logo.jpg" height="150"></center><br>
 			<div id="searchfield">
 				<form method="post" action="javascript:void(0);">
-					<input type="text" name="keyword" class="biginput"
-						id="autocomplete" placeholder="Go Hunt!">
+					<input type="text" name="keyword" class="biginput" id="autocomplete" placeholder="category:keyword Eg: bdm:costshare">
 				</form>
 			</div>
 			<center><p id="message"></p></center>
-			<div style="text-align: center; width: 100%; display: none"
-				id="addDefinitionDiv">
-				<p>Word not found. Enter the word, definition and click Add
-					button.</p>
-				<textarea id="definitionText" cols="80" rows="8" maxlength="500"  placeholder="Help me Evolve!"></textarea>
+			<div style="text-align: center; width: 100%; display: none" id="addDefinitionDiv">
+				<p>Word not found. Enter the word, definition and click Add button.</p>
+				<textarea id="definitionText" cols="80" rows="8" maxlength="500" placeholder="Help me Evolve!"></textarea>
 				<br> <input type="button" value="Add" class="button" id="addDefinition">
+			</div>
+			<div class="delete-form-popup" id="deleteForm">
+				<div class="delete-form-container">
+					<p>Are you sure you want to remove this definition?</p>
+					<button type="button" class="btn" onclick="deleteDefinition()">Delete</button>
+					<button type="button" class="btn cancel" onclick="closeForm('deleteForm')">Close</button>
+				</div>
+			</div>
+			<div class="update-form-popup" id="updateForm">
+				<div class="update-form-container">
+					<textarea id="newDefinitionText" cols="80" rows="8" maxlength="500"
+						placeholder="Update Definition"></textarea>
+					<button type="button" class="btn" onclick="updateDefinition()">Update</button>
+					<button type="button" class="btn cancel" onclick="closeForm('updateForm')">Close</button>
+				</div>
 			</div>
 			<div id="outputbox" style="padding: 30px; text-align: center;">
 				<p id="outputcontent"></p>

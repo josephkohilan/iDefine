@@ -17,5 +17,9 @@ public interface DefinitionService {
 	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword);
 
 	public boolean updateVote(String definitionId, int upVote, int downVote);
+
+	public boolean deleteDefinition(String definitionId);
+
+	public boolean updateDefinition(DefinitionEntity iDefineMasterEntity);
 	
 }
