@@ -51,7 +51,6 @@ $(function() {
 	});
 });
 var definitionIdTemp = '';
-var definitionTemp = '';
 function getKeyWords(){
 	keywords = [];
 	$.ajax({
@@ -111,10 +110,10 @@ function getDefinition(keyword) {
 							'<tr>' +
 								'<td class="dateRow">Created date: ' + val.createdDate + '</td>' +
 								'<td>'+
-									'<img src = "../img/edit.png" width = 15px onclick="openForm('+val.definitionId+',\'updateForm\')">' +
+									'<img src = "../img/edit.png" width = 20px onclick="openForm('+val.definitionId+',\''+val.definition.replace(/\n/g, "<br>")+'\',\'updateForm\')">' +
 								'</td>' +
 								'<td>'+
-									'<img src = "../img/delete.png" width = 15px onclick="openForm('+val.definitionId+',\'deleteForm\')">'+
+									'<img src = "../img/delete.png" width = 20px onclick="openForm('+val.definitionId+',\'\',\'deleteForm\')">'+
 								'</td>' + 
 							'</tr>'+
 						'</table>'+
@@ -237,16 +236,20 @@ function updateDefinition(){
 		}
 	});
 }
-function openForm(defId, formName) {
+function openForm(defId, def, formName) {
 	definitionIdTemp = defId;
 	if("deleteForm" == formName){
 		closeForm('updateForm');
 	} else if ("updateForm" == formName){
+		$('#newDefinitionText').val(def);
 		closeForm('deleteForm');
 	}
     document.getElementById(formName).style.display = "block";
 }
 
 function closeForm(formName) {
+	if ("updateForm" == formName){
+		$('#newDefinitionText').val('');
+	}
     document.getElementById(formName).style.display = "none";
 }
