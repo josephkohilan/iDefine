@@ -57,8 +57,8 @@ public class DefinitionController {
 	@PostMapping("definition")
 	public @ResponseBody boolean addDefinition(@RequestBody DefinitionDto definitionDto) throws IDefineException {
 		iDefineMasterEntity.setDefinitionId(null);
-		iDefineMasterEntity.setKeyword(definitionDto.getKeyword().toLowerCase().trim());
-		iDefineMasterEntity.setDefinition(definitionDto.getDefinition().trim());
+		iDefineMasterEntity.setKeyword(definitionDto.getKeyword().toLowerCase().trim().replaceAll("\"", "\\\""));
+		iDefineMasterEntity.setDefinition(definitionDto.getDefinition().trim().replaceAll("\"", "\\\""));
 		iDefineMasterEntity.setApprovalStatus(false);
 		iDefineMasterEntity.setUpVotes(UtilConstants.VOTE_COUNT_ZERO);
 		iDefineMasterEntity.setDownVotes(UtilConstants.VOTE_COUNT_ZERO);
