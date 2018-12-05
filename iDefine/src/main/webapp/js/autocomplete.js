@@ -83,25 +83,23 @@ function getDefinition(keyword) {
 		async : false,
 		success : function(data) {
 			$.each(data, function(key, val) {
-				if(elementCount%2==0){
+				if(elementCount%4==0){
 					flashCards = flashCards + '<tr>';
 				}
 				elementCount++;
-				if(elementCount%4==0){
+				if(elementCount%3==0){
 					flashCards = flashCards + '<td class="flashCard" style="background-color: #ABEBC6;">';
-				}else if(elementCount%4==1){
+				}else if(elementCount%3==1){
 					flashCards = flashCards + '<td class="flashCard" style="background-color: #F7DC6F;">';
-				}else if(elementCount%4==2){
+				}else if(elementCount%3==2){
 					flashCards = flashCards + '<td class="flashCard" style="background-color: #D6EAF8;">';
-				}else if(elementCount%4==3){
-					flashCards = flashCards + '<td class="flashCard" style="background-color: #E8DAEF;">';
 				}
 				flashCards = flashCards + '<table class="votingTable"><tr><td>';
-				flashCards = flashCards + '<center>' + keyword.toUpperCase();
+				flashCards = flashCards + '<center><b>' + keyword.toUpperCase();
 				if(val.approvalStatus != true){
 					flashCards = flashCards + '<img src = "../img/warning.png" width = 15px title="Yet to be reviewed">';
 				}
-				flashCards = flashCards + '</center></td></tr><tr><td><br></td></tr><tr><td class="definitionData">';
+				flashCards = flashCards + '</b></center></td></tr><tr><td><br></td></tr><tr><td class="definitionData">';
 				flashCards = flashCards + val.definition.replace(/\n/g, "<br>") + '</td></tr>' + 
 				'<tr><td><br></td></tr>' +
 				'<tr>'+
@@ -135,12 +133,16 @@ function getDefinition(keyword) {
 						'</table>' + 
 					'</td>' +
 				'</tr></table></td>';
-				if(elementCount%2==0){
+				if(elementCount%4==0){
 					flashCards = flashCards + '</tr>';
 				}
 			});
-			if(elementCount%2!=0){
-				flashCards = flashCards + '<td class="flashCard" style="box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);"></td></tr>';
+			if(elementCount%4!=0){
+				for(i = 0; i < 4-elementCount%4; i++){
+					flashCards = flashCards + '<td class="flashCard" style="box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);"></td>';
+				}
+				alert(flashCards);
+				flashCards = flashCards + '</tr>';
 			}
 		}
 	});

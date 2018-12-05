@@ -22,11 +22,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 }
 
 html {
-	height: 101%;
+	height: 100%;
 }
 
 body {
-	background: #f0f0f0;
+	background: #fff;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #313131;
 	font-size: 62.5%;
@@ -192,31 +192,16 @@ a:hover {
 	display: block;
 	text-align: center;
 }
-
-/** page structure **/
-#w {
-	display: block;
-	width: 90%;
-	margin: 0 auto;
-	padding-top: 30px;
-}
-
 #content {
 	display: block;
 	width: 100%;
-	background: #fff;
-	padding:20px;
-	padding-bottom: 20px;
-	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
 
 #searchfield {
 	display: block;
 	width: 100%;
 	text-align: center;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 #searchfield form {
@@ -230,15 +215,15 @@ a:hover {
 }
 
 #searchfield form .biginput {
-	width: 600px;
-	height: 40px;
+	width: 450px;
+	height: 30px;
 	padding: 0 10px 0 10px;
 	background-color: #fff;
 	border: 1px solid #c8c8c8;
 	border-radius: 3px;
 	color: #aeaeae;
 	font-weight: normal;
-	font-size: 1.5em;
+	font-size: 1em;
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
 	transition: all 0.2s linear;
@@ -330,7 +315,7 @@ input[type=text]::-ms-clear {
     border: 2px solid #009343;
 }
 #outputCardsTable{
-	width: 60%;
+	width: 100%;
 	border-collapse: separate; 
 	border-spacing: 20px;
 	font-size: 12px;
@@ -338,13 +323,13 @@ input[type=text]::-ms-clear {
 }
 .flashCard{
     border: 3px solid white;
-    width: 50%;
+    width: 22%;
     padding: 20px;
-    height: 315px;
+    height: 240px;
     box-shadow: 0px 2px 18px 0px rgba(0,0,1,1);
 }
 .definitionData{
-    height: 210px;
+    height: 140px;
     text-align: left;
 }
 .buttonsData{
@@ -367,7 +352,6 @@ input[type=text]::-ms-clear {
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
-/* The popup form - hidden by default */
 .delete-form-popup, .update-form-popup {
   display: none;
   position: fixed;
@@ -377,7 +361,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   z-index: 9;
 }
 
-/* Add styles to the form container */
 .delete-form-container {
   max-width: 300px;
   padding: 10px;
@@ -399,13 +382,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
   height: 200px;
 }
 
-/* When the inputs get focus, do something */
 .update-form-container textarea:focus {
   background-color: #ddd;
   outline: none;
 }
 
-/* Set a style for the submit/login button */
 .delete-form-container .btn, .update-form-container .btn {
   background-color: #4CAF50;
   color: white;
@@ -417,12 +398,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
   opacity: 0.8;
 }
 
-/* Add a red background color to the cancel button */
 .delete-form-container .cancel, .update-form-container .cancel {
   background-color: red;
 }
 
-/* Add some hover effects to buttons */
 .delete-form-container .btn:hover, .update-form-container .btn:hover {
   opacity: 1;
 }
