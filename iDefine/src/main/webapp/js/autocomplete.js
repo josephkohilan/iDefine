@@ -141,7 +141,6 @@ function getDefinition(keyword) {
 				for(i = 0; i < 4-elementCount%4; i++){
 					flashCards = flashCards + '<td class="flashCard" style="box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);"></td>';
 				}
-				alert(flashCards);
 				flashCards = flashCards + '</tr>';
 			}
 		}
