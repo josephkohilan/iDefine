@@ -1,8 +1,8 @@
 ---
 applications:
-- name: iDefine
+- name: iEvolve
   memory: 1G
   instances: 1
   random-route: true
-  path: target/iDefine-0.0.1-SNAPSHOT.war
+  path: target/iEvolve-0.0.1-SNAPSHOT.war
 
