@@ -1,4 +1,4 @@
-package com.deloitte.idefine.service;
+package com.deloitte.ievolve.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import java.util.TreeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.deloitte.idefine.entity.DefinitionEntity;
-import com.deloitte.idefine.repository.DefinitionRepository;
-import com.deloitte.idefine.utility.UtilMethods;
+import com.deloitte.ievolve.entity.DefinitionEntity;
+import com.deloitte.ievolve.repository.DefinitionRepository;
+import com.deloitte.ievolve.utility.UtilMethods;
 
 @Service
 public class DefinitionServiceImpl implements DefinitionService {

@@ -1,4 +1,4 @@
-package com.deloitte.idefine.controller;
+package com.deloitte.ievolve.controller;
 
 import java.sql.Date;
 import java.util.List;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.deloitte.idefine.dto.DefinitionDto;
-import com.deloitte.idefine.entity.DefinitionEntity;
-import com.deloitte.idefine.exception.IDefineException;
-import com.deloitte.idefine.service.DefinitionService;
-import com.deloitte.idefine.utility.UtilConstants;
+import com.deloitte.ievolve.dto.DefinitionDto;
+import com.deloitte.ievolve.entity.DefinitionEntity;
+import com.deloitte.ievolve.exception.IDefineException;
+import com.deloitte.ievolve.service.DefinitionService;
+import com.deloitte.ievolve.utility.UtilConstants;
 
 @Controller
 public class DefinitionController {

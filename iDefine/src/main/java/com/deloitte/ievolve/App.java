@@ -1,4 +1,4 @@
-package com.deloitte.idefine;
+package com.deloitte.ievolve;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

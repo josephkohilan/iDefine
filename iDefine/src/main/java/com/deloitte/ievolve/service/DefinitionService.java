@@ -1,11 +1,11 @@
-package com.deloitte.idefine.service;
+package com.deloitte.ievolve.service;
 
 import java.util.ArrayList;
 import java.util.TreeSet;
 
 import org.springframework.stereotype.Service;
 
-import com.deloitte.idefine.entity.DefinitionEntity;
+import com.deloitte.ievolve.entity.DefinitionEntity;
 
 @Service
 public interface DefinitionService {

@@ -1,4 +1,4 @@
-package com.deloitte.idefine.entity;
+package com.deloitte.ievolve.entity;
 
 import java.sql.Date;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name = "idefine_master_table")
+@Table(name = "ievolve_master_table")
 public class DefinitionEntity {
 	
 	@Id

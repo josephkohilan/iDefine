@@ -1,4 +1,4 @@
-package com.deloitte.idefine.dto;
+package com.deloitte.ievolve.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

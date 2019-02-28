@@ -1,4 +1,4 @@
-package com.deloitte.idefine.repository;
+package com.deloitte.ievolve.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.deloitte.idefine.entity.DefinitionEntity;
-import com.deloitte.idefine.utility.QueryConstants;
+import com.deloitte.ievolve.entity.DefinitionEntity;
+import com.deloitte.ievolve.utility.QueryConstants;
 
 @Transactional
 @Repository
@@ -30,7 +30,7 @@ public class DefinitionRepositoryImpl implements DefinitionRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword) {
-		String sql = "SELECT * FROM idefine_master_table WHERE keyword like '%" + inputKeyword
+		String sql = "SELECT * FROM ievolve_master_table WHERE keyword like '%" + inputKeyword
 				+ "%' ORDER BY up_votes DESC";
 		Query query = entityManager.createNativeQuery(sql, DefinitionEntity.class);
 		return (ArrayList<DefinitionEntity>) query.getResultList();
@@ -44,7 +44,7 @@ public class DefinitionRepositoryImpl implements DefinitionRepository {
 
 	@Override
 	public boolean updateVote(String definitionId, int upVote, int downVote) {
-		String sql = "UPDATE idefine_master_table SET up_votes = '" + upVote + "', down_votes = '" + downVote
+		String sql = "UPDATE ievolve_master_table SET up_votes = '" + upVote + "', down_votes = '" + downVote
 				+ "' WHERE definition_id = '" + definitionId + "'";
 		Query query = entityManager.createNativeQuery(sql);
 		query.executeUpdate();
@@ -53,7 +53,7 @@ public class DefinitionRepositoryImpl implements DefinitionRepository {
 
 	@Override
 	public boolean deleteDefinition(String definitionId) {
-		String sql = "DELETE from idefine_master_table WHERE definition_id = '" + definitionId + "'";
+		String sql = "DELETE from ievolve_master_table WHERE definition_id = '" + definitionId + "'";
 		Query query = entityManager.createNativeQuery(sql);
 		query.executeUpdate();
 		return true;
@@ -61,7 +61,7 @@ public class DefinitionRepositoryImpl implements DefinitionRepository {
 
 	@Override
 	public boolean updateDefinition(DefinitionEntity iDefineMasterEntity) {
-		String sql = "update idefine_master_table set definition = '"+iDefineMasterEntity.getDefinition()+"', "
+		String sql = "update ievolve_master_table set definition = '"+iDefineMasterEntity.getDefinition()+"', "
 				+ "approval_status = "+ iDefineMasterEntity.getApprovalStatus() +", up_votes = '"+ iDefineMasterEntity.getUpVotes() +"', "
 				+ "down_votes = '"+ iDefineMasterEntity.getDownVotes() +"', created_date = '"+ iDefineMasterEntity.getCreatedDate() +"' "
 				+ "WHERE definition_id = '" + iDefineMasterEntity.getDefinitionId() + "'";

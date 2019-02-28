@@ -1,4 +1,4 @@
-package com.deloitte.idefine.exception;
+package com.deloitte.ievolve.exception;
 
 public class IDefineException extends Exception{
 

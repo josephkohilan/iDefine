@@ -1,11 +1,11 @@
-package com.deloitte.idefine.repository;
+package com.deloitte.ievolve.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.deloitte.idefine.entity.DefinitionEntity;
+import com.deloitte.ievolve.entity.DefinitionEntity;
 
 @Repository
 public interface DefinitionRepository {
