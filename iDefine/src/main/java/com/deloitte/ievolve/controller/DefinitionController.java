@@ -48,16 +48,29 @@ public class DefinitionController {
 		return iDefineBO.getKeyWords();
 	}
 
-	@GetMapping("definition/{inputKeyword}")
-	public @ResponseBody List<DefinitionEntity> getDefinition(@PathVariable String inputKeyword)
+	@GetMapping("definition/{keyword}")
+	public @ResponseBody List<DefinitionEntity> getDefinition(@PathVariable String keyword)
 			throws IDefineException {
-		return iDefineBO.getDefinition(inputKeyword);
+		String category = null;
+		if(keyword.contains(":")) {
+			category = keyword.substring(0, keyword.indexOf(":")).trim();
+			keyword = keyword.substring(keyword.indexOf(":")+1).trim();
+		}
+		return iDefineBO.getDefinition(keyword, category);
 	}
 
 	@PostMapping("definition")
 	public @ResponseBody boolean addDefinition(@RequestBody DefinitionDto definitionDto) throws IDefineException {
+		String keyword = definitionDto.getKeyword().toLowerCase().trim().replaceAll("\"", "\\\"");
+		String category = null;
+		if(keyword.contains(":")) {
+			category = keyword.substring(0, keyword.indexOf(":")).trim();
+			category = category.equals("")?null:category;
+			keyword = keyword.substring(keyword.indexOf(":")+1).trim();
+		}
 		iDefineMasterEntity.setDefinitionId(null);
-		iDefineMasterEntity.setKeyword(definitionDto.getKeyword().toLowerCase().trim().replaceAll("\"", "\\\""));
+		iDefineMasterEntity.setKeyword(keyword);
+		iDefineMasterEntity.setCategory(category);
 		iDefineMasterEntity.setDefinition(definitionDto.getDefinition().trim().replaceAll("\"", "\\\""));
 		iDefineMasterEntity.setApprovalStatus(false);
 		iDefineMasterEntity.setUpVotes(UtilConstants.VOTE_COUNT_ZERO);

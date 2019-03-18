@@ -12,7 +12,7 @@ public interface DefinitionRepository {
 
 	public List<String> getKeyWords();
 
-	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword);
+	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword, String category);
 
 	public boolean addDefinition(DefinitionEntity iDefineMasterInsertEntity);
 	

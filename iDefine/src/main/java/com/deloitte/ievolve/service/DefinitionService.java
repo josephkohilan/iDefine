@@ -14,7 +14,7 @@ public interface DefinitionService {
 
 	public TreeSet<String> getKeyWords();
 
-	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword);
+	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword, String category);
 
 	public boolean updateVote(String definitionId, int upVote, int downVote);
 

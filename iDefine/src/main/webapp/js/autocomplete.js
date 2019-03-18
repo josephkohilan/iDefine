@@ -15,13 +15,13 @@ $(function() {
 		}
 	});
 	$('#addDefinition').click(function() {
+		var autocompleteVal = $('#autocomplete').val().trim();
 		if($('#definitionText').val().trim()==""){
 			$('#definitionText').focus();
 			$('#message').html("<font color=red>Enter definition</font>");
-		}
-		else if($('#autocomplete').val().trim()==""){
+		}else if(autocompleteVal=="" || autocompleteVal==":" || autocompleteVal.indexOf(":") == autocompleteVal.length -1){
 			$('#autocomplete').focus();
-			$('#message').html("<font color=red>Enter keyword</font>");
+			$('#message').html("<font color=red>Enter valid keyword</font>");
 		}else{
 			$('#message').html("");
 			$.ajax({

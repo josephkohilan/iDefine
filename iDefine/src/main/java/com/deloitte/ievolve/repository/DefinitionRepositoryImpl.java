@@ -23,15 +23,28 @@ public class DefinitionRepositoryImpl implements DefinitionRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> getKeyWords() {
-		Query query = entityManager.createNativeQuery(QueryConstants.GET_KEYWORD_QUERY);
-		return query.getResultList();
+		List<String> resultList = new ArrayList<>();
+		Query keywordQuery = entityManager.createNativeQuery(QueryConstants.GET_KEYWORD_QUERY);
+		resultList.addAll(keywordQuery.getResultList());
+		Query categorykeywordQuery = entityManager.createNativeQuery(QueryConstants.GET_CATEGORY_KEYWORD_QUERY);
+		resultList.addAll(categorykeywordQuery.getResultList());
+		return resultList;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword) {
-		String sql = "SELECT * FROM ievolve_master_table WHERE keyword like '%" + inputKeyword
-				+ "%' ORDER BY up_votes DESC";
+	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword, String category) {
+		String sql = "SELECT * FROM ievolve_master_table WHERE ";
+		if(null != inputKeyword && !inputKeyword.equals("")) {
+			sql = sql + "keyword like '%" + inputKeyword +"%' ";
+		}
+		if(null != category && !category.equals("")) {
+			if(null != inputKeyword && !inputKeyword.equals("")) {
+				sql = sql + "AND ";
+			}
+			sql = sql + "category = '"+ category +"'";
+		}
+		sql = sql + "ORDER BY up_votes DESC, down_votes asc";
 		Query query = entityManager.createNativeQuery(sql, DefinitionEntity.class);
 		return (ArrayList<DefinitionEntity>) query.getResultList();
 	}

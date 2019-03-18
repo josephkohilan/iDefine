@@ -16,7 +16,7 @@ public class DefinitionServiceImpl implements DefinitionService {
 
 	@Autowired
 	private DefinitionRepository iDefineDAO;
-	
+
 	@Override
 	public boolean addDefinition(DefinitionEntity iDefineMasterEntity) {
 		return iDefineDAO.addDefinition(iDefineMasterEntity);
@@ -28,22 +28,28 @@ public class DefinitionServiceImpl implements DefinitionService {
 		try {
 			List<String> keywordList = iDefineDAO.getKeyWords();
 			for (String keywords : keywordList) {
-				if(!UtilMethods.isNullOrEmpty(keywords)) {
+				String category = "";
+				if(keywords.contains(":") && !(keywords.indexOf(":") == keywords.length() -1)) {
+					category = keywords.substring(0, keywords.indexOf(":"));
+					keywords = keywords.substring(keywords.indexOf(":") + 1).trim();
+				}
+				if (!UtilMethods.isNullOrEmpty(keywords)) {
 					String[] keywordArray = keywords.split(",");
 					for (String keyword : keywordArray) {
-						keyWordsSet.add(keyword.trim().toLowerCase());
+						keyWordsSet.add(category.equals("") ? keyword.trim().toLowerCase()
+								: (category.trim() + ":" + keyword.trim()).toLowerCase());
 					}
 				}
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return keyWordsSet;
 	}
 
 	@Override
-	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword) {
-		return iDefineDAO.getDefinition(inputKeyword);
+	public ArrayList<DefinitionEntity> getDefinition(String inputKeyword, String category) {
+		return iDefineDAO.getDefinition(inputKeyword, category);
 	}
 
 	@Override
